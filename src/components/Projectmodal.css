@@ -1,0 +1,228 @@
+/* =============================================
+   PROJECT MODAL — Portafolio JC Saravia
+   ============================================= */
+
+/* ── Overlay con blur ── */
+.pm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(10, 14, 20, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: pm-overlay-in 0.2s ease;
+}
+
+/* ── Modal container ── */
+.pm-modal {
+  width: 100%;
+  max-width: 640px;
+  max-height: 80vh;
+  background: #0d1117;
+  border: 1px solid rgba(90, 158, 146, 0.25);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(90, 158, 146, 0.08) inset;
+  animation: pm-modal-in 0.28s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+/* ── Header ── */
+.pm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(90, 158, 146, 0.15);
+  background: rgba(90, 158, 146, 0.06);
+  flex-shrink: 0;
+}
+
+.pm-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pm-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f5f0e8;
+  letter-spacing: 0.02em;
+}
+
+.pm-tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.pm-tag {
+  font-size: 10px;
+  color: #7ec8b8;
+  background: rgba(90, 158, 146, 0.12);
+  border: 1px solid rgba(90, 158, 146, 0.25);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.05em;
+}
+
+.pm-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.pm-open-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #7ec8b8;
+  background: rgba(90, 158, 146, 0.12);
+  border: 1px solid rgba(90, 158, 146, 0.3);
+  border-radius: 7px;
+  padding: 5px 11px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.pm-open-btn:hover {
+  background: rgba(90, 158, 146, 0.22);
+  border-color: #5a9e92;
+  color: #f5f0e8;
+}
+
+.pm-close {
+  background: none;
+  border: none;
+  color: rgba(245, 240, 232, 0.4);
+  cursor: pointer;
+  font-size: 17px;
+  line-height: 1;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.pm-close:hover {
+  color: #f5f0e8;
+}
+
+/* ── iframe wrapper ── */
+.pm-iframe-wrapper {
+  flex: 1;
+  position: relative;
+  min-height: 380px;
+  background: #0a0e14;
+}
+
+.pm-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  min-height: 380px;
+}
+
+/* ── Placeholder ── */
+.pm-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: rgba(245, 240, 232, 0.3);
+}
+
+.pm-placeholder-icon {
+  width: 40px;
+  height: 40px;
+  opacity: 0.3;
+}
+
+.pm-placeholder p {
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.08em;
+}
+
+/* ── Loading spinner ── */
+.pm-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0e14;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.pm-loading.hidden {
+  opacity: 0;
+}
+
+.pm-spinner {
+  width: 26px;
+  height: 26px;
+  border: 2px solid rgba(90, 158, 146, 0.15);
+  border-top-color: #5a9e92;
+  border-radius: 50%;
+  animation: pm-spin 0.8s linear infinite;
+}
+
+/* ── Animaciones ── */
+@keyframes pm-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pm-modal-in {
+  from { opacity: 0; transform: scale(0.94) translateY(10px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+
+@keyframes pm-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Responsive móvil ── */
+@media (max-width: 600px) {
+  .pm-overlay {
+    padding: 12px;
+    align-items: flex-end;
+  }
+
+  .pm-modal {
+    max-height: 88vh;
+    border-radius: 14px 14px 10px 10px;
+    max-width: 100%;
+  }
+
+  .pm-iframe-wrapper,
+  .pm-iframe {
+    min-height: 300px;
+  }
+
+  .pm-title {
+    font-size: 12px;
+  }
+
+  .pm-open-btn span {
+    display: none;
+  }
+}

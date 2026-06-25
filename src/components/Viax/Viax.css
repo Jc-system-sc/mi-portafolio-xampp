@@ -1,0 +1,287 @@
+/* =============================================
+   VIAX — Hexágono Tech · Portafolio JC Saravia
+   ============================================= */
+
+:root {
+  --vx-teal:        #5a9e92;
+  --vx-teal-light:  #7ec8b8;
+  --vx-teal-dim:    rgba(90, 158, 146, 0.18);
+  --vx-cream:       #f5f0e8;
+  --vx-dark:        #0d1117;
+  --vx-glow:        rgba(90, 158, 146, 0.5);
+  --vx-glass-bg:    rgba(13, 17, 23, 0.55);
+  --vx-glass-border:rgba(90, 158, 146, 0.25);
+}
+
+/* ── Wrapper fijo ── */
+.viax-wrapper {
+  position: fixed;
+  bottom: 36px;
+  right: 36px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  user-select: none;
+}
+
+/* ── Hexágono clickeable ── */
+.viax-hex {
+  position: relative;
+  width: 82px;
+  height: 82px;
+  cursor: pointer;
+  animation: vx-float 4s ease-in-out infinite;
+  transition: filter 0.25s ease;
+  filter: drop-shadow(0 0 10px var(--vx-glow));
+}
+
+.viax-hex:hover {
+  filter: drop-shadow(0 0 18px var(--vx-glow)) drop-shadow(0 0 6px var(--vx-teal-light));
+}
+
+.viax-hex:active {
+  transform: scale(0.94);
+}
+
+/* ── Label ── */
+.viax-label {
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--vx-teal);
+  font-family: 'Courier New', monospace;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+/* =============================================
+   CHAT — glassmorphism tech
+   ============================================= */
+.viax-chat {
+  width: 310px;
+  background: var(--vx-glass-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--vx-glass-border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(90,158,146,0.1) inset;
+  animation: vx-chat-in 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: bottom right;
+}
+
+/* header */
+.viax-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--vx-glass-border);
+  background: rgba(90, 158, 146, 0.08);
+}
+
+.viax-chat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.viax-chat-status {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--vx-teal-light);
+  box-shadow: 0 0 6px var(--vx-teal-light);
+  animation: vx-blink 2.5s ease-in-out infinite;
+}
+
+.viax-chat-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--vx-teal-light);
+  letter-spacing: 0.18em;
+  font-family: 'Courier New', monospace;
+}
+
+.viax-chat-subtitle {
+  font-size: 9px;
+  color: rgba(245,240,232,0.35);
+  letter-spacing: 0.08em;
+  font-family: 'Courier New', monospace;
+}
+
+.viax-chat-close {
+  background: none;
+  border: none;
+  color: rgba(245,240,232,0.45);
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.viax-chat-close:hover { color: var(--vx-cream); }
+
+/* mensajes */
+.viax-messages {
+  height: 210px;
+  overflow-y: auto;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--vx-teal-dim) transparent;
+}
+
+.viax-messages::-webkit-scrollbar { width: 3px; }
+.viax-messages::-webkit-scrollbar-thumb {
+  background: var(--vx-teal-dim);
+  border-radius: 3px;
+}
+
+.viax-msg {
+  max-width: 88%;
+  padding: 7px 11px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.55;
+  word-break: break-word;
+  animation: vx-msg-in 0.18s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.viax-msg.user {
+  align-self: flex-end;
+  background: rgba(90, 158, 146, 0.28);
+  color: var(--vx-cream);
+  border: 1px solid rgba(90,158,146,0.35);
+  border-bottom-right-radius: 3px;
+}
+
+.viax-msg.assistant {
+  align-self: flex-start;
+  background: rgba(255,255,255,0.04);
+  color: rgba(245,240,232,0.88);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-bottom-left-radius: 3px;
+}
+
+.viax-msg.typing {
+  align-self: flex-start;
+  color: var(--vx-teal);
+  font-style: italic;
+  font-size: 11px;
+  background: none;
+  border: none;
+  padding-left: 2px;
+}
+
+/* input */
+.viax-input-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--vx-glass-border);
+}
+
+.viax-input {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(90,158,146,0.2);
+  border-radius: 8px;
+  padding: 7px 10px;
+  color: var(--vx-cream);
+  font-size: 12px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.viax-input::placeholder { color: rgba(245,240,232,0.28); }
+.viax-input:focus { border-color: rgba(90,158,146,0.55); }
+
+.viax-send {
+  background: rgba(90,158,146,0.2);
+  border: 1px solid rgba(90,158,146,0.35);
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.viax-send:hover {
+  background: rgba(90,158,146,0.38);
+  border-color: var(--vx-teal);
+}
+
+.viax-send:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.viax-send svg {
+  width: 13px;
+  height: 13px;
+  fill: var(--vx-teal-light);
+}
+
+/* =============================================
+   ANIMACIONES
+   ============================================= */
+@keyframes vx-float {
+  0%, 100% { transform: translateY(0px);   }
+  50%       { transform: translateY(-7px); }
+}
+
+@keyframes vx-blink {
+  0%, 100% { opacity: 1;   }
+  50%       { opacity: 0.2; }
+}
+
+@keyframes vx-chat-in {
+  from { opacity: 0; transform: scale(0.88) translateY(8px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);   }
+}
+
+@keyframes vx-msg-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+@keyframes vx-spin-slow {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes vx-spin-rev {
+  from { transform: rotate(0deg);    }
+  to   { transform: rotate(-360deg); }
+}
+
+@keyframes vx-pulse-ring {
+  0%, 100% { opacity: 0.15; r: 28; }
+  50%       { opacity: 0.4;  r: 30; }
+}
+
+@keyframes vx-node-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1;   }
+}
+
+@media (max-width: 480px) {
+  .viax-wrapper { bottom: 18px; right: 18px; }
+  .viax-chat    { width: 272px; }
+}
